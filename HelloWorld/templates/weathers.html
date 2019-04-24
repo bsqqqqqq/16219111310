@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+     <!-- 引入jQuery -->
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>         
+     <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    <title>我的项目</title>        
+</head>
+<body>
+<!-- bootstrap 特性容器 -->
+ <div class="container">
+ <br>
+ <br>
+  <h1>天气预报</h1> 
+ <br>
+ <br>
+ <h3><a href='http://127.0.0.1:8000/'>返回我的首页！</a></h3>  
+  <br>
+  <br>
+  {% for content in content_list %}
+        <h3>{{content.id}}&nbsp&nbsp&nbsp&nbsp:&nbsp&nbsp&nbsp&nbsp{{content.wCity}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.wDate}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.wWeather}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{content.wTemp}}</h3>
+        <br><br><br>
+        {% endfor %}
+
+
+
+{% if data %}
+    <ul id="pages" class="pagination pagination-sm pagination-xs">
+        {% if data.first %}
+        <li><a href="?page=1">1</a></li>
+        {% endif %}
+        {% if data.left %}
+        {% if data.left_has_more %}
+        <li><span>...</span></li>
+        {% endif %}
+        {% for i in data.left %}
+        <li><a href="?page={{i}}">{{i}}</a></li>
+        {% endfor %}
+        {% endif %}
+        <li class="active"><a href="?page={{data.page}}">{{data.page}}</a></li>
+        {% if data.right %}
+        {% for i in data.right %}
+        <li><a href="?page={{i}}">{{i}}</a></li>
+        {% endfor %}
+        {% if data.right_has_more %}
+        <li><span>...</span></li>
+        {% endif %}
+        {% endif %}
+        {% if data.last %}
+        <li><a href="?page={{data.total_pages}}">{{data.total_pages}}</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+ 
+ </div>
+
+<br><br><br>
+<br><br><br>
+<br><br><br>
+
+</body>
+</html>

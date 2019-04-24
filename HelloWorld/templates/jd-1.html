@@ -1,0 +1,87 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+ 
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+ 
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+     <!-- 引入 Bootstrap -->
+     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+     <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+     <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>  
+
+
+    
+    <title>我的项目</title> 
+ 
+</head>
+ 
+<body>
+<div  class="container" >
+ <br>
+ <br>
+  <h1>京东商城——手机</h1> 
+ <br>
+ <br>
+ <h3><a href='http://127.0.0.1:8000/'>返回我的首页！</a></h3>  
+  <br>
+  <br>
+  {% for content in content_list %}
+        <h4>
+        编号：{{content.mNo}}<br>
+        图片：<br>
+        <img src="static/download/{{content.mNo}}.jpg" /><br>
+        品牌：{{content.mMark}}<br>
+        价格：{{content.mPrice}}<br>
+        简介：{{content.mNote}}<br>
+        </h4>
+        <br><br><br>
+        {% endfor %}
+
+    
+    {% if data %}
+    <ul id="pages" class="pagination pagination-sm pagination-xs">
+        {% if data.first %}
+        <li><a href="?page=1">1</a></li>
+        {% endif %}
+        {% if data.left %}
+        {% if data.left_has_more %}
+        <li><span>...</span></li>
+        {% endif %}
+        {% for i in data.left %}
+        <li><a href="?page={{i}}">{{i}}</a></li>
+        {% endfor %}
+        {% endif %}
+        <li class="active"><a href="?page={{data.page}}">{{data.page}}</a></li>
+        {% if data.right %}
+        {% for i in data.right %}
+        <li><a href="?page={{i}}">{{i}}</a></li>
+        {% endfor %}
+        {% if data.right_has_more %}
+        <li><span>...</span></li>
+        {% endif %}
+        {% endif %}
+        {% if data.last %}
+        <li><a href="?page={{data.total_pages}}">{{data.total_pages}}</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+   
+</div>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+</body>
+ 
+</html>
